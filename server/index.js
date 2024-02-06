@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { publicProcedure, router } from './trpc';
+import prisma from '@/lib/prismaClient';
 
 export const appRouter = router({
     userList: publicProcedure
@@ -9,6 +10,13 @@ export const appRouter = router({
 
             // const users: User[]
             return [10, 20, 30];
+        }),
+    users: publicProcedure
+        .query(async () => {
+            // Retrieve users from a datasource, this is an imaginary database
+            const users = await prisma.user.findMany();
+
+            return users;
         }),
     userCreate: publicProcedure
         .input(z.object({ name: z.string() }))
