@@ -1,15 +1,13 @@
-'use client'
 
-import { trpc } from "@/trpc/trpc";
+import ClientData from "@/components/clientData";
+import ServerData from "@/components/serverData";
 
 export default function Home() {
-  const data = trpc.userList.useQuery()
-  const users = trpc.users.useQuery()
   return (
     <>
       <h1>hiya</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-      <pre>{JSON.stringify(users, null, 2)}</pre>
+      <ClientData />
+      <ServerData />
     </>
   );
 }
